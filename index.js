@@ -44,7 +44,7 @@ function HakunaClient (opts) {
 
     fetch(completeUrl, params)
       .then(function (response) {
-        if (params.method.toLowerCase() === 'delete') {
+        if (params.method && params.method.toLowerCase() === 'delete') {
           if (response.status === 200) return cb(null)
           return cb(new Error(response.status))
         }
