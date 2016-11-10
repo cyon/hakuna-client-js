@@ -1,0 +1,20 @@
+{
+  "name": "hakuna-client-js",
+  "version": "0.0.0",
+  "description": "Client to the Hakuna API",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "author": "Max Gfeller <mg@cyon.ch>",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^8.5.0",
+    "tape": "^4.6.2"
+  },
+  "dependencies": {
+    "es6-promise": "^4.0.5",
+    "isomorphic-fetch": "^2.2.1",
+    "querystring": "^0.2.0"
+  }
+}
