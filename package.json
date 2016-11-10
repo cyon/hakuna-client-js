@@ -1,5 +1,5 @@
 {
-  "name": "hakuna-client-js",
+  "name": "hakuna-client",
   "version": "0.0.0",
   "description": "Client to the Hakuna API",
   "main": "index.js",
