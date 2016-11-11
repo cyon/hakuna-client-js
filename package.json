@@ -1,11 +1,10 @@
 {
   "name": "hakuna-client",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Client to the Hakuna API",
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https://github.com/cyon/hakuna-client-js.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyon/hakuna-client-js.git"
   },
   "main": "index.js",
   "scripts": {
