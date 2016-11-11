@@ -1,5 +1,7 @@
 # hakuna-client
 
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 This is a JavaScript client for the [Hakuna API](https://www.hakuna.ch/docs). It
 supports all API functions and can be used with npm:
 
@@ -23,3 +25,190 @@ client.overview(function (err, result) {
   console.log(result)
 })
 ```
+
+## Documentation
+
+The official API documentation can be found on the [official site](https://www.hakuna.ch/docs).
+
+To use the client you need to get your personal API key, you can find it by
+clicking your name on the top right in your Hakuna and select "API".
+
+### Personal
+
+Those endpoints allow you to make the requests in the context of another user
+that you can manage. This can be specially useful when you're a team leader and
+want to get information for your team members.
+
+This client knows the "personal user mode" which can be enabled like follows:
+
+```javascript
+client.setPersonalUserMode('anotherUserId')
+
+client.listTimeEntries('2016-11-11', (err, results) => {
+  if (err) console.error(err)
+
+  console.log(results)
+})
+
+client.resetPersonalUserMode()
+```
+
+#### `overview(cb)`
+
+```
+cb - function (err, result)
+```
+
+Quick overview over your key metrics.
+
+#### `getTimer(cb)`
+
+```
+cb - function (err, result)
+```
+
+Retrieves the timer.
+
+#### `startTimer(timeTypeId, opts, cb)`
+
+```
+timeTypeId - The TimeType id
+opts - object (optional)
+  projectId - The id of the project
+  startTime - Another start time
+  note - A note
+cb - function (err, result)
+```
+
+Starts a timer.
+
+#### `stopTimer(endTime, cb)`
+
+```
+endTime - alternative end time (optional)
+cb - function (err, result)
+```
+
+Stops a running timer.
+
+#### `cancelTimer(cb)`
+
+```
+cb - function (err)
+```
+
+Cancels a running timer.
+
+#### `listTimeEntries(date, cb)`
+
+```
+date - Date as string YYYY-MM-DD
+cb - function (err, results)
+```
+
+Lists time entries for a given date.
+
+#### `getTimeEntry(id, cb)`
+
+```
+id - ID of the time entry
+cb - function (err, result)
+```
+
+Gets a single time entry.
+
+#### `createTimeEntry(entry, cb)`
+
+```
+entry - object
+  starts - Start date and time in ISO 8601 format
+  ends - End date and time in ISO 8601 format
+  timeTypeId - The time type id
+  projectId - The project's id (optional)
+  note - A note (optional)
+cb - function (err, result)
+```
+
+Create a new time entry.
+
+#### `updateTimeEntry(entry, cb)`
+
+```
+entry - object
+  id - The id of the entry
+  starts - Start date and time in ISO 8601 format
+  ends - End date and time in ISO 8601 format
+  timeTypeId - The time type id
+  projectId - The project's id (optional)
+  note - A note (optional)
+cb - function (err, result)
+```
+
+Update an existing time entry.
+
+#### `deleteTimeEntry(id, cb)`
+
+```
+id - The id of the entry
+cb - function (err)
+```
+
+Delete an entry by it's id.
+
+#### `listAbsences(year, cb)`
+
+```
+year - Year as string
+cb - function (err, results)
+```
+
+List absences for a given year.
+
+#### `listManageableUsers(cb)`
+
+```
+cb - function (err, results)
+```
+
+List users that can be managed.
+
+### Global
+
+#### `listTimeTypes(cb)`
+
+```
+cb - function (err, results)
+```
+
+List all available time types.
+
+#### `listProjects(cb)`
+
+```
+cb - function (err, results)
+```
+
+List all active and archived projects.
+
+### Organization
+
+**Note:** A special organization API token is needed for this. TODO: actually
+make that easier to access.
+
+#### `getOrganizationStatus(cb)`
+
+```
+cb - function (err, result)
+```
+
+Retrieves today’s presence/absence information about all users in your
+organization.
+
+## Tests
+
+Right now the only thing that is being tested is the standard compliant coding
+style. Run this with `npm test`.
+
+## License
+
+MIT
