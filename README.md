@@ -33,6 +33,16 @@ The official API documentation can be found on the [official site](https://www.h
 To use the client you need to get your personal API key, you can find it by
 clicking your name on the top right in your Hakuna and select "API".
 
+Please note that the callbacks are [node style, error first](http://fredkschott.com/post/2014/03/understanding-error-first-callbacks-in-node-js/).
+The first parameter to the callback function always is an error. This makes
+error handling pretty easy:
+
+```javascript
+client.overview(function (err, result) {
+  if (err) // handle error here
+})
+```
+
 ### Personal
 
 Those endpoints allow you to make the requests in the context of another user
