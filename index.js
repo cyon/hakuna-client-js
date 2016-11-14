@@ -30,7 +30,9 @@ function HakunaClient (opts) {
     if (!params.headers) params.headers = {}
 
     params.headers['Content-Type'] = 'application/json'
-    params.headers['X-Auth-Token'] = opts.authToken
+    if (!params.headers['X-Auth-Token']) {
+      params.headers['X-Auth-Token'] = opts.authToken
+    }
 
     if (opts.userAgent) params.headers['User-Agent'] = opts.userAgent
 
@@ -181,8 +183,16 @@ HakunaClient.prototype.listProjects = function (cb) {
   this._authorizedRequest('/projects', {}, cb)
 }
 
-HakunaClient.prototype.getOrganizationStatus = function (cb) {
-  this._authorizedRequest('/organization/status', {}, cb)
+HakunaClient.prototype.getOrganizationStatus = function (apiKey, cb) {
+  if (typeof apiKey === 'function') {
+    cb = apiKey
+    apiKey = null
+  }
+
+  var params = {}
+  if (apiKey) params.headers = { 'X-Auth-Token': apiKey }
+
+  this._authorizedRequest('/organization/status', params, cb)
 }
 
 module.exports = HakunaClient

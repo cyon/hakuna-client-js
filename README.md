@@ -202,12 +202,14 @@ List all active and archived projects.
 
 ### Organization
 
-**Note:** A special organization API token is needed for this. TODO: actually
-make that easier to access.
+**Note:** An organizational API key is needed for this. If you've set up your
+client with a personal API key but still want to use this functionality, you can
+pass another API key as parameter.
 
-#### `getOrganizationStatus(cb)`
+#### `getOrganizationStatus(apiKey, cb)`
 
 ```
+apiKey - organizational API key (optional)
 cb - function (err, result)
 ```
 
