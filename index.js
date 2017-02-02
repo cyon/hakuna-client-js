@@ -53,6 +53,7 @@ function HakunaClient (opts) {
         return response.json()
       })
       .then(function (json) {
+        if (json.error) return cb(json)
         return cb(null, json)
       })
       .catch(function (e) {
