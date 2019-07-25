@@ -79,6 +79,14 @@ cb - function (err, result)
 
 Quick overview over your key metrics.
 
+#### `getOwnUser(cb)`
+
+```
+cb - function (err, user)
+```
+
+Get information on own user.
+
 #### `getTimer(cb)`
 
 ```

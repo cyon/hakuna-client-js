@@ -98,6 +98,10 @@ HakunaClient.prototype.overview = function (cb) {
   return this._authorizedRequest('/overview', {}, cb)
 }
 
+HakunaClient.prototype.getOwnUser = function (cb) {
+  return this._authorizedRequest('/users/me', {}, cb)
+}
+
 HakunaClient.prototype.getTimer = function (cb) {
   return this._authorizedRequest('/timer', {}, cb)
 }
