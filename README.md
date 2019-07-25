@@ -43,6 +43,14 @@ client.overview(function (err, result) {
 })
 ```
 
+**New in `2.0.0`**: If no callback function was given, a promise will be returned.
+
+Example:
+
+```javascript
+let overview = await client.overview()
+```
+
 ### Personal
 
 Those endpoints allow you to make the requests in the context of another user
