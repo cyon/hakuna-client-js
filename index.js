@@ -78,18 +78,18 @@ HakunaClient.prototype.getTimer = function (cb) {
   this._authorizedRequest('/timer', {}, cb)
 }
 
-HakunaClient.prototype.startTimer = function (timeTypeId, opts, cb) {
+HakunaClient.prototype.startTimer = function (taskId, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
     opts = {}
   }
 
   var body = {
-    time_type_id: timeTypeId
+    task_id: taskId
   }
 
-  if (opts.projectId) body.project_id = opts.projectId
   if (opts.startTime) body.start_time = opts.start_time
+  if (opts.projectId) body.project_id = opts.projectId
   if (opts.note) body.note = opts.note
 
   this._authorizedRequest('/timer', {
