@@ -44,6 +44,28 @@ function HakunaClient (opts) {
       completeUrl.indexOf('?') > -1 ? completeUrl += qs : completeUrl += '?' + qs
     }
 
+    if (!cb) {
+      return new Promise((resolve, reject) => {
+        fetch(completeUrl, params)
+          .then(function (response) {
+            if (params.method && params.method.toLowerCase() === 'delete') {
+              if (response.status === 200) return cb(null)
+              return reject(new Error(response.status))
+            }
+            return response.json()
+          })
+          .then(function (json) {
+            if (json.error) {
+              return reject(json)
+            }
+            return resolve(json)
+          })
+          .catch(function (e) {
+            return reject(e)
+          })
+      })
+    }
+
     fetch(completeUrl, params)
       .then(function (response) {
         if (params.method && params.method.toLowerCase() === 'delete') {
@@ -53,7 +75,9 @@ function HakunaClient (opts) {
         return response.json()
       })
       .then(function (json) {
-        if (json.error) return cb(json)
+        if (json.error) {
+          return cb(json)
+        }
         return cb(null, json)
       })
       .catch(function (e) {
@@ -71,11 +95,11 @@ HakunaClient.prototype.resetPersonalUserMode = function () {
 }
 
 HakunaClient.prototype.overview = function (cb) {
-  this._authorizedRequest('/overview', {}, cb)
+  return this._authorizedRequest('/overview', {}, cb)
 }
 
 HakunaClient.prototype.getTimer = function (cb) {
-  this._authorizedRequest('/timer', {}, cb)
+  return this._authorizedRequest('/timer', {}, cb)
 }
 
 HakunaClient.prototype.startTimer = function (taskId, opts, cb) {
@@ -92,7 +116,7 @@ HakunaClient.prototype.startTimer = function (taskId, opts, cb) {
   if (opts.projectId) body.project_id = opts.projectId
   if (opts.note) body.note = opts.note
 
-  this._authorizedRequest('/timer', {
+  return this._authorizedRequest('/timer', {
     method: 'POST',
     body: JSON.stringify(body)
   }, cb)
@@ -107,23 +131,23 @@ HakunaClient.prototype.stopTimer = function (endTime, cb) {
   var body = {}
   if (endTime) body.end_time = endTime
 
-  this._authorizedRequest('/timer', {
+  return this._authorizedRequest('/timer', {
     method: 'PUT',
     body: JSON.stringify(body)
   }, cb)
 }
 
 HakunaClient.prototype.cancelTimer = function (cb) {
-  this._authorizedRequest('/timer', { method: 'DELETE' }, cb)
+  return this._authorizedRequest('/timer', { method: 'DELETE' }, cb)
 }
 
 HakunaClient.prototype.listTimeEntries = function (date, cb) {
   var qs = querystring.stringify({ date: date })
-  this._authorizedRequest('/time_entries?' + qs, {}, cb)
+  return this._authorizedRequest('/time_entries?' + qs, {}, cb)
 }
 
 HakunaClient.prototype.getTimeEntry = function (id, cb) {
-  this._authorizedRequest('/time_entries/' + id, {}, cb)
+  return this._authorizedRequest('/time_entries/' + id, {}, cb)
 }
 
 HakunaClient.prototype.createTimeEntry = function (entry, cb) {
@@ -137,7 +161,7 @@ HakunaClient.prototype.createTimeEntry = function (entry, cb) {
     delete entry.projectId
   }
 
-  this._authorizedRequest('/time_entries', {
+  return this._authorizedRequest('/time_entries', {
     method: 'POST',
     body: JSON.stringify(entry)
   }, cb)
@@ -157,27 +181,27 @@ HakunaClient.prototype.updateTimeEntry = function (entry, cb) {
     delete entry.projectId
   }
 
-  this._authorizedRequest('/time_entries/' + id, {
+  return this._authorizedRequest('/time_entries/' + id, {
     method: 'PATCH',
     body: JSON.stringify(entry)
   }, cb)
 }
 
 HakunaClient.prototype.deleteTimeEntry = function (id, cb) {
-  this._authorizedRequest('/time_entries/' + id, { method: 'DELETE' }, cb)
+  return this._authorizedRequest('/time_entries/' + id, { method: 'DELETE' }, cb)
 }
 
 HakunaClient.prototype.listAbsences = function (year, cb) {
   var qs = querystring.stringify({ year: year })
-  this._authorizedRequest('/absences?' + qs, {}, cb)
+  return this._authorizedRequest('/absences?' + qs, {}, cb)
 }
 
 HakunaClient.prototype.listManageableUsers = function (cb) {
-  this._authorizedRequest('/users', {}, cb)
+  return this._authorizedRequest('/users', {}, cb)
 }
 
 HakunaClient.prototype.listProjects = function (cb) {
-  this._authorizedRequest('/projects', {}, cb)
+  return this._authorizedRequest('/projects', {}, cb)
 }
 
 HakunaClient.prototype.getOrganizationStatus = function (apiKey, cb) {
@@ -189,11 +213,11 @@ HakunaClient.prototype.getOrganizationStatus = function (apiKey, cb) {
   var params = {}
   if (apiKey) params.headers = { 'X-Auth-Token': apiKey }
 
-  this._authorizedRequest('/organization/status', params, cb)
+  return this._authorizedRequest('/organization/status', params, cb)
 }
 
 HakunaClient.prototype.listTasks = function (cb) {
-  this._authorizedRequest('/tasks', {}, cb)
+  return this._authorizedRequest('/tasks', {}, cb)
 }
 
 module.exports = HakunaClient
