@@ -196,4 +196,8 @@ HakunaClient.prototype.getOrganizationStatus = function (apiKey, cb) {
   this._authorizedRequest('/organization/status', params, cb)
 }
 
+HakunaClient.prototype.listTasks = function (cb) {
+  this._authorizedRequest('/tasks', {}, cb)
+}
+
 module.exports = HakunaClient
