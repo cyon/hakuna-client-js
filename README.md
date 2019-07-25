@@ -79,10 +79,10 @@ cb - function (err, result)
 
 Retrieves the timer.
 
-#### `startTimer(timeTypeId, opts, cb)`
+#### `startTimer(taskId, opts, cb)`
 
 ```
-timeTypeId - The TimeType id
+taskId - The ID of the task
 opts - object (optional)
   projectId - The id of the project
   startTime - Another start time
@@ -133,7 +133,7 @@ Gets a single time entry.
 entry - object
   starts - Start date and time in ISO 8601 format
   ends - End date and time in ISO 8601 format
-  timeTypeId - The time type id
+  taskId - The task id
   projectId - The project's id (optional)
   note - A note (optional)
 cb - function (err, result)
@@ -148,7 +148,7 @@ entry - object
   id - The id of the entry
   starts - Start date and time in ISO 8601 format
   ends - End date and time in ISO 8601 format
-  timeTypeId - The time type id
+  taskId - The task id
   projectId - The project's id (optional)
   note - A note (optional)
 cb - function (err, result)

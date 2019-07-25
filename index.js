@@ -127,9 +127,9 @@ HakunaClient.prototype.getTimeEntry = function (id, cb) {
 }
 
 HakunaClient.prototype.createTimeEntry = function (entry, cb) {
-  if (entry.timeTypeId) {
-    entry.time_type_id = entry.timeTypeId
-    delete entry.timeTypeId
+  if (entry.taskId) {
+    entry.task_id = entry.taskId
+    delete entry.taskId
   }
 
   if (entry.projectId) {
@@ -147,9 +147,9 @@ HakunaClient.prototype.updateTimeEntry = function (entry, cb) {
   var id = entry.id
   delete entry.id
 
-  if (entry.timeTypeId) {
-    entry.time_type_id = entry.timeTypeId
-    delete entry.timeTypeId
+  if (entry.taskId) {
+    entry.task_id = entry.taskId
+    delete entry.taskId
   }
 
   if (entry.projectId) {
