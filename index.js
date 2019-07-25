@@ -176,10 +176,6 @@ HakunaClient.prototype.listManageableUsers = function (cb) {
   this._authorizedRequest('/users', {}, cb)
 }
 
-HakunaClient.prototype.listTimeTypes = function (cb) {
-  this._authorizedRequest('/time_types', {}, cb)
-}
-
 HakunaClient.prototype.listProjects = function (cb) {
   this._authorizedRequest('/projects', {}, cb)
 }

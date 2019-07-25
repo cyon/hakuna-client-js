@@ -184,13 +184,13 @@ List users that can be managed.
 
 ### Global
 
-#### `listTimeTypes(cb)`
+#### `listTasks(cb)`
 
 ```
 cb - function (err, results)
 ```
 
-List all available time types.
+List all available tasks.
 
 #### `listProjects(cb)`
 
