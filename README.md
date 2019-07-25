@@ -156,7 +156,7 @@ cb - function (err, result)
 
 Update an existing time entry.
 
-#### `deleteTimeEntry(id, cb)`
+#### `deleteTimeEntry(id, cb)`
 
 ```
 id - The id of the entry
