@@ -15,8 +15,7 @@ npm install --save hakuna-client
 const HakunaClient = require('hakuna-client')
 
 const client = new HakunaClient({
-  authToken: 'yourAuthToken',
-  company: 'yourCompanyName'
+  authToken: 'yourAuthToken'
 })
 
 client.overview(function (err, result) {
