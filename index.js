@@ -21,7 +21,6 @@ function isPersonalRequest (url) {
 
 function HakunaClient (opts) {
   if (!opts.authToken) throw Error('authToken is required')
-  if (!opts.company) throw Error('company is required')
 
   this.userId = null
   var self = this
@@ -36,7 +35,7 @@ function HakunaClient (opts) {
 
     if (opts.userAgent) params.headers['User-Agent'] = opts.userAgent
 
-    var completeUrl = 'https://' + opts.company + '.hakuna.ch/api/' +
+    var completeUrl = 'https://app.hakuna.ch/api/' +
       apiVersion + url
 
     if (self.userId && isPersonalRequest(url)) {
